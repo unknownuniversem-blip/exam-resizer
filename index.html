@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Exam Photo & Signature Studio - NTA NEET, JEE, SSC, UPSC & Banking</title>
+  <meta name="description" content="100% Client-side privacy-first exam photo, signature, postcard photo resizer and compressor for NTA NEET UG, JEE Main, SSC, UPSC, and Banking exams.">
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card: #151f32;
+      --card-inner: #0d1526;
+      --border: #223249;
+      --border-focus: #38bdf8;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #38bdf8;
+      --accent: #10b981;
+      --accent-hover: #059669;
+      --radius: 10px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 3rem 1rem;
+    }
+    header { text-align: center; margin-bottom: 1.75rem; }
+    header .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--primary);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 9999px;
+      margin-bottom: 0.6rem;
+    }
+    header h1 {
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    header p {
+      color: var(--muted);
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .studio-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 900px) {
+      .studio-layout {
+        grid-template-columns: 1.15fr 0.85fr;
+        align-items: start;
+      }
+      .sticky-pane {
+        position: sticky;
+        top: 1.5rem;
+      }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .card:last-child { margin-bottom: 0; }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-subtitle {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .nav-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+    .nav-tab-btn {
+      flex: 1 1 calc(33.33% - 6px);
+      min-width: 85px;
+      padding: 8px 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-align: center;
+      background: var(--card-inner);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .nav-tab-btn.active {
+      background: var(--primary);
+      color: #0b1120;
+      border-color: var(--primary);
+      font-weight: 700;
+    }
+    .preset-drawer {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 4px;
+      margin-bottom: 1.25rem;
+    }
+    .preset-drawer::-webkit-scrollbar { width: 5px; }
+    .preset-drawer::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+    .preset-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+    .preset-item.active {
+      border-color: var(--primary);
+      background: rgba(56, 189, 248, 0.08);
+    }
+    .preset-info strong {
+      display: block;
+      font-size: 0.85rem;
+      color: #fff;
+    }
+    .preset-info span {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .preset-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+    .pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #1e293b;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+    .pill.kb {
+      color: var(--accent);
+      background: rgba(16, 185, 129, 0.1);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 0.8rem;
+    }
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 0.8rem;
+    }
+    @media (max-width: 480px) {
+      .form-grid-3 { grid-template-columns: 1fr; }
+    }
+    .form-group { margin-bottom: 0.75rem; }
+    label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 9px 11px;
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus { border-color: var(--border-focus); }
+    .file-dropzone {
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      background: var(--card-inner);
+      cursor: pointer;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .file-dropzone:hover { border-color: var(--primary); }
+    .file-dropzone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    .dropzone-label {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .dropzone-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    .control-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 0.6rem;
+    }
+    .control-row label {
+      width: 70px;
+      margin-bottom: 0;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+    input[type="range"] {
+      flex: 1;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+    .range-val {
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: var(--muted);
+      width: 35px;
+      text-align: right;
+    }
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+    .toggle-row span {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .toggle-row input[type="checkbox"] {
+      accent-color: var(--accent);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    .canvas-viewport-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .canvas-wrapper {
+      position: relative;
+      background: #000;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 260px;
+      max-height: 480px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      padding: 8px;
+    }
+    canvas#mainCanvas {
+      max-width: 100%;
+      max-height: 440px;
+      object-fit: contain;
+      border-radius: 4px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .canvas-overlay-guide {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      border: 2px dashed rgba(56, 189, 248, 0.65);
+      border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+      width: 55%;
+      height: 75%;
+      display: none;
+    }
+    .canvas-overlay-guide.show { display: block; }
+    .live-meta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .live-meta-bar strong { color: #fff; }
+    .btn-action {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-align: center;
+      background: var(--accent);
+      color: #052e16;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+    .btn-action:hover { background: var(--accent-hover); }
+    .btn-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 9px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: var(--card-inner);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+    .btn-secondary:hover {
+      color: #fff;
+      border-color: var(--muted);
+    }
+    .ecosystem-section {
+      margin-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+    .ecosystem-section h3 {
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 0.4rem;
+      text-align: center;
+    }
+    .ecosystem-section p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+    .eco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .eco-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.15s ease;
+    }
+    .eco-card:hover { border-color: var(--primary); }
+    .eco-card strong {
+      display: block;
+      font-size: 0.88rem;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .eco-card span {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .share-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 1.5rem;
+    }
+    .share-btn {
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .share-btn:hover {
+      color: #fff;
+      border-color: var(--muted);
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 0.6rem;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--primary); }
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-backdrop.active { display: flex; }
+    .modal-dialog {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 550px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 1.5rem;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .modal-header h4 { font-size: 1.1rem; color: #fff; }
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+    .modal-body {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    #toast {
+      visibility: hidden;
+      min-width: 200px;
+      background-color: var(--primary);
+      color: #0b1120;
+      text-align: center;
+      border-radius: 6px;
+      padding: 10px 16px;
+      position: fixed;
+      z-index: 2000;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    #toast.show {
+      visibility: visible;
+      animation: fadein 0.3s, fadeout 0.3s 2.2s;
+    }
+    @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 24px; opacity: 1; } }
+    @keyframes fadeout { from { bottom: 24px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">Desktop & Mobile Ready • 100% Client-Side</div>
+      <h1>Exam Photo & Signature Studio</h1>
+      <p>Precision dimension resizer, 80% face framing, and KB auto-compressor for NTA NEET UG, JEE Main, SSC, UPSC, and Banking exams.</p>
+    </header>
+
+    <div class="studio-layout">
+      <div class="controls-column">
+        <div class="card">
+          <div class="card-title">1. Select Document</div>
+          <div class="card-subtitle">Choose photo, signature, postcard, or thumb impression</div>
+          <div class="file-dropzone" onclick="document.getElementById('fileInput').click()">
+            <input type="file" id="fileInput" accept="image/*">
+            <div class="dropzone-label">📁 Click or Drop Image Here</div>
+            <div class="dropzone-sub">Supports JPG, PNG, WEBP (Processed locally in browser memory)</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">2. Choose Official Exam Preset</div>
+          <div class="card-subtitle">Auto-configures dimension units, DPI, and portal KB bounds</div>
+          
+          <div class="nav-tabs" id="categoryTabs">
+            <button class="nav-tab-btn active" onclick="filterCategory('nta')">NTA (NEET/JEE)</button>
+            <button class="nav-tab-btn" onclick="filterCategory('ssc')">SSC</button>
+            <button class="nav-tab-btn" onclick="filterCategory('upsc')">UPSC</button>
+            <button class="nav-tab-btn" onclick="filterCategory('banking')">IBPS/Banking</button>
+            <button class="nav-tab-btn" onclick="filterCategory('custom')">Custom</button>
+          </div>
+
+          <div class="preset-drawer" id="presetDrawer"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">3. Dimension & Output Parameters</div>
+          <div class="card-subtitle">Physical size conversion at selected scanner DPI</div>
+
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label>Unit</label>
+              <select id="unitSelect" onchange="onUnitOrDpiChange()">
+                <option value="cm" selected>Centimeters (cm)</option>
+                <option value="mm">Millimeters (mm)</option>
+                <option value="inch">Inches (in)</option>
+                <option value="px">Pixels (px)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>DPI Standard</label>
+              <select id="dpiSelect" onchange="onUnitOrDpiChange()">
+                <option value="200" selected>200 DPI (Govt Standard)</option>
+                <option value="300">300 DPI (High Res)</option>
+                <option value="150">150 DPI (Compact)</option>
+                <option value="96">96 DPI (Web Standard)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Aspect Ratio</label>
+              <select id="aspectRatioLock" onchange="renderLivePreview()">
+                <option value="free" selected>Free (Exact Size)</option>
+                <option value="locked">Maintain Aspect</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label id="widthLabel">Width (cm)</label>
+              <input type="number" id="inputWidth" value="3.5" step="0.1" oninput="onDimensionInput()">
+            </div>
+            <div class="form-group">
+              <label id="heightLabel">Height (cm)</label>
+              <input type="number" id="inputHeight" value="4.5" step="0.1" oninput="onDimensionInput()">
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Min Size (KB)</label>
+              <input type="number" id="minKbInput" value="10">
+            </div>
+            <div class="form-group">
+              <label>Max Size (KB)</label>
+              <input type="number" id="maxKbInput" value="200">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">4. Framing & Regulatory Stamper</div>
+          <div class="card-subtitle">Position face, whiten signature paper, or add DoP banner</div>
+
+          <div class="control-row">
+            <label>Zoom</label>
+            <input type="range" id="zoomSlider" min="0.5" max="3" step="0.02" value="1" oninput="renderLivePreview()">
+            <span class="range-val" id="zoomVal">1.0x</span>
+          </div>
+
+          <div class="control-row">
+            <label>Pan X</label>
+            <input type="range" id="panXSlider" min="-200" max="200" step="1" value="0" oninput="renderLivePreview()">
+            <span class="range-val" id="panXVal">0</span>
+          </div>
+
+          <div class="control-row">
+            <label>Pan Y</label>
+            <input type="range" id="panYSlider" min="-200" max="200" step="1" value="0" oninput="renderLivePreview()">
+            <span class="range-val" id="panYVal">0</span>
+          </div>
+
+          <div class="toggle-row">
+            <span>Show 80% Face Guide Overlay</span>
+            <input type="checkbox" id="toggleFaceGuide" onchange="toggleOverlayGuide()">
+          </div>
+
+          <div class="toggle-row">
+            <span>Paper Whitener & Ink Enhancer (Signatures)</span>
+            <input type="checkbox" id="toggleWhitener" onchange="renderLivePreview()">
+          </div>
+
+          <div class="toggle-row">
+            <span>Name & Date of Photo (DoP) Stamp</span>
+            <input type="checkbox" id="toggleStamper" onchange="toggleStamperFields()">
+          </div>
+
+          <div id="stamperFields" style="display:none; margin-top:8px;">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Candidate Name</label>
+                <input type="text" id="stampName" placeholder="e.g. AMAN SHARMA" oninput="renderLivePreview()">
+              </div>
+              <div class="form-group">
+                <label>Date of Photo (DoP)</label>
+                <input type="text" id="stampDate" placeholder="DD-MM-YYYY" oninput="renderLivePreview()">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="preview-column sticky-pane">
+        <div class="canvas-viewport-card">
+          <div class="card-title" style="justify-content:center;">Live Document Preview</div>
+          <div class="card-subtitle">Real-time pixel render matching portal upload requirements</div>
+
+          <div class="canvas-wrapper">
+            <canvas id="mainCanvas" width="276" height="354"></canvas>
+            <div id="faceGuideOverlay" class="canvas-overlay-guide"></div>
+          </div>
+
+          <div class="live-meta-bar">
+            <div>Dimensions: <strong id="lblCanvasPx">276 × 354 px</strong></div>
+            <div>File Size: <strong id="lblCanvasKb" style="color:var(--accent);">~35 KB</strong></div>
+            <div>DPI: <strong id="lblCanvasDpi">200</strong></div>
+          </div>
+
+          <button class="btn-action" onclick="compressAndDownload()">⚡ Compress & Download JPG</button>
+          <button class="btn-secondary" onclick="resetAdjustments()">↺ Reset Framing & Sliders</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ecosystem-section">
+      <h3>More Zero-Cost Client-Side Utilities</h3>
+      <p>Discover fast, ad-free offline web tools built for speed and privacy.</p>
+      <div class="eco-grid">
+        <a href="../whatsapp/" class="eco-card">
+          <strong>Direct WhatsApp Opener</strong>
+          <span>Send messages to numbers instantly without saving to contacts.</span>
+        </a>
+        <a href="../land-converter/" class="eco-card">
+          <strong>Bigha & Land Converter</strong>
+          <span>UP, Bihar & Punjab Bigha/Biswa to Sq Ft and Acres.</span>
+        </a>
+        <a href="https://unknownuniversem-blip.github.io/typing-speed-finger-test/" class="eco-card">
+          <strong>Typing Speed Master</strong>
+          <span>Clean WPM typing speed test with offline accuracy tracking.</span>
+        </a>
+        <a href="#" class="eco-card">
+          <strong>EMI & Prepayment Calc</strong>
+          <span>Visualize interest reduction from small regular principal prepayments.</span>
+        </a>
+      </div>
+
+      <div class="share-bar">
+        <button class="share-btn" onclick="shareWhatsApp()">💬 Share on WhatsApp</button>
+        <button class="share-btn" onclick="shareTelegram()">✈️️ Telegram Share</button>
+        <button class="share-btn" onclick="copyShareLink()">🔗 Copy Link</button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="javascript:void(0)" onclick="openModal('modalPrivacy')">Privacy Policy</a>
+        <a href="javascript:void(0)" onclick="openModal('modalTerms')">Terms</a>
+        <a href="javascript:void(0)" onclick="openModal('modalDisclaimer')">Disclaimer</a>
+        <a href="javascript:void(0)" onclick="openModal('modalContact')">Contact</a>
+      </div>
+      <div>100% In-Browser Execution. No images or logs are ever transmitted over the network.</div>
+    </footer>
+  </div>
+
+  <div class="modal-backdrop" id="modalPrivacy">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4>Client-Side Privacy Policy</h4>
+        <button class="modal-close-btn" onclick="closeModal('modalPrivacy')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>This application is engineered as a 100% client-side web utility. When you select a photo, signature, or document, it is rendered strictly inside your device's memory using standard HTML5 Canvas APIs.</p>
+        <br>
+        <p><strong>Zero Network Uploads:</strong> No photos, personal names, dates, or documents are ever transferred to or processed on external servers. You can safely disconnect your internet and continue using this tool offline.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalTerms">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4>Terms of Service</h4>
+        <button class="modal-close-btn" onclick="closeModal('modalTerms')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>This tool is provided for educational and pre-submission formatting purposes. While presets are aligned with standard public recruitment advertisements, candidates are advised to verify requirements against their specific exam notification.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalDisclaimer">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4>Official Disclaimer</h4>
+        <button class="modal-close-btn" onclick="closeModal('modalDisclaimer')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>This web application is an independent open-source utility and is not affiliated with, endorsed by, or associated with the National Testing Agency (NTA), Staff Selection Commission (SSC), Union Public Service Commission (UPSC), or the Institute of Banking Personnel Selection (IBPS).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalContact">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4>Contact & Feedback</h4>
+        <button class="modal-close-btn" onclick="closeModal('modalContact')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Found a discrepancy in exam requirements or need a new exam preset added?</p>
+        <br>
+        <button class="btn-action" onclick="window.location.href='mailto:support@example.com?subject=Exam%20Studio%20Feedback'">Email Maintainer</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast">Link copied to clipboard!</div>
+
+  <script>
+    const EXAM_PRESETS = [
+      { id: 'nta-neet-photo', cat: 'nta', title: 'NEET UG Passport Photo', sub: '3.5×4.5 cm (80% Face Coverage, White BG)', unit: 'cm', w: 3.5, h: 4.5, minKb: 10, maxKb: 200, dpi: 200, guide: true, stamp: false },
+      { id: 'nta-neet-postcard', cat: 'nta', title: 'NEET UG Postcard Size Photo', sub: '4×6 Inch Postcard with Name & DoP', unit: 'inch', w: 4.0, h: 6.0, minKb: 10, maxKb: 200, dpi: 200, guide: true, stamp: true },
+      { id: 'nta-neet-sign', cat: 'nta', title: 'NEET UG Signature', sub: '3.5×1.5 cm Running Handwriting', unit: 'cm', w: 3.5, h: 1.5, minKb: 10, maxKb: 100, dpi: 200, guide: false, stamp: false },
+      { id: 'nta-jee-photo', cat: 'nta', title: 'JEE Main Passport Photo', sub: '3.5×4.5 cm Clear Face & Ears', unit: 'cm', w: 3.5, h: 4.5, minKb: 10, maxKb: 200, dpi: 200, guide: true, stamp: false },
+      { id: 'nta-jee-sign', cat: 'nta', title: 'JEE Main Signature', sub: '3.5×1.5 cm White Paper Black Ink', unit: 'cm', w: 3.5, h: 1.5, minKb: 10, maxKb: 100, dpi: 200, guide: false, stamp: false },
+
+      { id: 'ssc-photo', cat: 'ssc', title: 'SSC Photo (CGL, CHSL, GD)', sub: '3.5×4.5 cm (Approx 350×450 px)', unit: 'cm', w: 3.5, h: 4.5, minKb: 20, maxKb: 50, dpi: 200, guide: true, stamp: false },
+      { id: 'ssc-sign', cat: 'ssc', title: 'SSC Signature', sub: '4.0×2.0 cm (Approx 400×200 px)', unit: 'cm', w: 4.0, h: 2.0, minKb: 10, maxKb: 20, dpi: 200, guide: false, stamp: false },
+
+      { id: 'upsc-photo', cat: 'upsc', title: 'UPSC Photo + Name/DoP', sub: 'Square 550×550 px with White Banner', unit: 'px', w: 550, h: 550, minKb: 20, maxKb: 200, dpi: 200, guide: true, stamp: true },
+      { id: 'upsc-sign', cat: 'upsc', title: 'UPSC Signature', sub: 'Square 350×350 px Clear Contrast', unit: 'px', w: 350, h: 350, minKb: 20, maxKb: 200, dpi: 200, guide: false, stamp: false },
+
+      { id: 'bank-photo', cat: 'banking', title: 'Banking Photo (IBPS/SBI)', sub: '200×230 px Passport Ratio', unit: 'px', w: 200, h: 230, minKb: 20, maxKb: 50, dpi: 200, guide: true, stamp: false },
+      { id: 'bank-sign', cat: 'banking', title: 'Banking Signature', sub: '140×60 px Black Ink Only', unit: 'px', w: 140, h: 60, minKb: 10, maxKb: 20, dpi: 200, guide: false, stamp: false },
+      { id: 'bank-thumb', cat: 'banking', title: 'Left Thumb Impression', sub: '240×240 px (3×3 cm)', unit: 'px', w: 240, h: 240, minKb: 20, maxKb: 50, dpi: 200, guide: false, stamp: false },
+      { id: 'bank-declaration', cat: 'banking', title: 'Handwritten Declaration', sub: '800×400 px (10×5 cm)', unit: 'px', w: 800, h: 400, minKb: 50, maxKb: 100, dpi: 200, guide: false, stamp: false }
+    ];
+
+    let currentImage = null;
+    let activeCategory = 'nta';
+    let activePresetId = 'nta-neet-photo';
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const today = new Date();
+      const dd = String(today.getDate()).padStart(2, '0');
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      document.getElementById('stampDate').value = `${dd}-${mm}-${today.getFullYear()}`;
+      initPlaceholderCanvas();
+      filterCategory('nta');
+    });
+
+    function filterCategory(cat) {
+      activeCategory = cat;
+      document.querySelectorAll('#categoryTabs .nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('#categoryTabs .nav-tab-btn')).find(b => b.getAttribute('onclick').includes(cat));
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const drawer = document.getElementById('presetDrawer');
+      drawer.innerHTML = '';
+
+      if (cat === 'custom') {
+        drawer.innerHTML = '<div style="font-size:0.8rem; color:var(--muted); padding:10px;">Custom mode enabled. Set exact parameters in Section 3 below.</div>';
+        return;
+      }
+
+      const list = EXAM_PRESETS.filter(p => p.cat === cat);
+      list.forEach(p => {
+        const item = document.createElement('div');
+        item.className = `preset-item ${p.id === activePresetId ? 'active' : ''}`;
+        item.onclick = () => selectPreset(p.id);
+        item.innerHTML = `
+          <div class="preset-info">
+            <strong>${p.title}</strong>
+            <span>${p.sub}</span>
+          </div>
+          <div class="preset-meta">
+            <span class="pill">${p.w}×${p.h} ${p.unit}</span>
+            <span class="pill kb">${p.minKb}-${p.maxKb} KB</span>
+          </div>
+        `;
+        drawer.appendChild(item);
+      });
+    }
+
+    function selectPreset(presetId) {
+      activePresetId = presetId;
+      const p = EXAM_PRESETS.find(item => item.id === presetId);
+      if (!p) return;
+
+      document.getElementById('unitSelect').value = p.unit;
+      document.getElementById('dpiSelect').value = p.dpi;
+      document.getElementById('inputWidth').value = p.w;
+      document.getElementById('inputHeight').value = p.h;
+      document.getElementById('minKbInput').value = p.minKb;
+      document.getElementById('maxKbInput').value = p.maxKb;
+
+      document.getElementById('toggleFaceGuide').checked = p.guide;
+      toggleOverlayGuide();
+
+      document.getElementById('toggleStamper').checked = p.stamp;
+      toggleStamperFields();
+
+      updateDimensionLabels();
+      filterCategory(activeCategory);
+      renderLivePreview();
+    }
+
+    function calculatePixels() {
+      const unit = document.getElementById('unitSelect').value;
+      const dpi = parseFloat(document.getElementById('dpiSelect').value) || 200;
+      const wVal = parseFloat(document.getElementById('inputWidth').value) || 3.5;
+      const hVal = parseFloat(document.getElementById('inputHeight').value) || 4.5;
+
+      let targetW = 0, targetH = 0;
+
+      if (unit === 'px') {
+        targetW = Math.round(wVal); targetH = Math.round(hVal);
+      } else if (unit === 'cm') {
+        targetW = Math.round((wVal / 2.54) * dpi); targetH = Math.round((hVal / 2.54) * dpi);
+      } else if (unit === 'mm') {
+        targetW = Math.round((wVal / 25.4) * dpi); targetH = Math.round((hVal / 25.4) * dpi);
+      } else if (unit === 'inch') {
+        targetW = Math.round(wVal * dpi); targetH = Math.round(hVal * dpi);
+      }
+
+      return { width: Math.max(50, targetW), height: Math.max(50, targetH), dpi: dpi };
+    }
+
+    function onUnitOrDpiChange() { updateDimensionLabels(); renderLivePreview(); }
+    function onDimensionInput() { renderLivePreview(); }
+
+    function updateDimensionLabels() {
+      const u = document.getElementById('unitSelect').value;
+      document.getElementById('widthLabel').innerText = `Width (${u})`;
+      document.getElementById('heightLabel').innerText = `Height (${u})`;
+    }
+
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        currentImage = new Image();
+        currentImage.onload = () => { resetAdjustments(); renderLivePreview(); };
+        currentImage.src = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function resetAdjustments() {
+      document.getElementById('zoomSlider').value = 1;
+      document.getElementById('panXSlider').value = 0;
+      document.getElementById('panYSlider').value = 0;
+      document.getElementById('zoomVal').innerText = '1.0x';
+      document.getElementById('panXVal').innerText = '0';
+      document.getElementById('panYVal').innerText = '0';
+      renderLivePreview();
+    }
+
+    function initPlaceholderCanvas() {
+      const canvas = document.getElementById('mainCanvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = 276; canvas.height = 354;
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#94a3b8'; ctx.font = '14px system-ui'; ctx.textAlign = 'center';
+      ctx.fillText('Select image to preview', canvas.width / 2, canvas.height / 2);
+    }
+
+    function renderLivePreview() {
+      const dims = calculatePixels();
+      const canvas = document.getElementById('mainCanvas');
+      const ctx = canvas.getContext('2d');
+
+      canvas.width = dims.width; canvas.height = dims.height;
+      document.getElementById('lblCanvasPx').innerText = `${dims.width} × ${dims.height} px`;
+      document.getElementById('lblCanvasDpi').innerText = dims.dpi;
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      if (!currentImage) {
+        ctx.fillStyle = '#94a3b8'; ctx.font = '14px system-ui'; ctx.textAlign = 'center';
+        ctx.fillText('Select an image above', canvas.width / 2, canvas.height / 2);
+        return;
+      }
+
+      const zoom = parseFloat(document.getElementById('zoomSlider').value);
+      const panX = parseFloat(document.getElementById('panXSlider').value);
+      const panY = parseFloat(document.getElementById('panYSlider').value);
+
+      document.getElementById('zoomVal').innerText = zoom.toFixed(1) + 'x';
+      document.getElementById('panXVal').innerText = panX;
+      document.getElementById('panYVal').innerText = panY;
+
+      const imgRatio = currentImage.width / currentImage.height;
+      const canvasRatio = canvas.width / canvas.height;
+      let drawW, drawH;
+
+      if (imgRatio > canvasRatio) {
+        drawH = canvas.height * zoom; drawW = drawH * imgRatio;
+      } else {
+        drawW = canvas.width * zoom; drawH = drawW / imgRatio;
+      }
+
+      const drawX = (canvas.width - drawW) / 2 + (panX * (canvas.width / 400));
+      const drawY = (canvas.height - drawH) / 2 + (panY * (canvas.height / 400));
+
+      ctx.drawImage(currentImage, drawX, drawY, drawW, drawH);
+
+      if (document.getElementById('toggleWhitener').checked) {
+        applySignatureWhitener(ctx, canvas.width, canvas.height);
+      }
+      if (document.getElementById('toggleStamper').checked) {
+        applyDoPStamp(ctx, canvas.width, canvas.height);
+      }
+      estimateCanvasSize(canvas);
+    }
+
+    function applySignatureWhitener(ctx, w, h) {
+      const imgData = ctx.getImageData(0, 0, w, h);
+      const d = imgData.data;
+      for (let i = 0; i < d.length; i += 4) {
+        const avg = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+        if (avg > 155) {
+          d[i] = 255; d[i+1] = 255; d[i+2] = 255;
+        } else {
+          const dark = Math.max(0, avg - 40);
+          d[i] = dark; d[i+1] = dark; d[i+2] = dark;
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+    }
+
+    function applyDoPStamp(ctx, w, h) {
+      const name = document.getElementById('stampName').value.trim() || 'CANDIDATE NAME';
+      const date = document.getElementById('stampDate').value.trim() || 'DOP: 01-01-2026';
+      const bannerH = Math.round(h * 0.18);
+      const bannerY = h - bannerH;
+
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(0, bannerY, w, bannerH);
+      ctx.strokeStyle = '#000000'; ctx.lineWidth = 1.5; ctx.strokeRect(0, bannerY, w, bannerH);
+      ctx.fillStyle = '#000000'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+
+      const fontSize = Math.max(12, Math.round(bannerH * 0.32));
+      ctx.font = `bold ${fontSize}px sans-serif`;
+      ctx.fillText(name.toUpperCase(), w / 2, bannerY + bannerH * 0.32);
+      ctx.font = `${Math.round(fontSize * 0.88)}px sans-serif`;
+      ctx.fillText(date, w / 2, bannerY + bannerH * 0.72);
+    }
+
+    function toggleOverlayGuide() {
+      const isChecked = document.getElementById('toggleFaceGuide').checked;
+      const guide = document.getElementById('faceGuideOverlay');
+      if (isChecked) guide.classList.add('show');
+      else guide.classList.remove('show');
+    }
+
+    function toggleStamperFields() {
+      const isChecked = document.getElementById('toggleStamper').checked;
+      document.getElementById('stamperFields').style.display = isChecked ? 'block' : 'none';
+      renderLivePreview();
+    }
+
+    function estimateCanvasSize(canvas) {
+      canvas.toBlob(blob => {
+        if (blob) {
+          const kb = (blob.size / 1024).toFixed(1);
+          document.getElementById('lblCanvasKb').innerText = `~${kb} KB`;
+        }
+      }, 'image/jpeg', 0.85);
+    }
+
+    async function compressAndDownload() {
+      if (!currentImage) return alert('Please select an image first.');
+      const canvas = document.getElementById('mainCanvas');
+      const minKb = parseFloat(document.getElementById('minKbInput').value) || 10;
+      const maxKb = parseFloat(document.getElementById('maxKbInput').value) || 200;
+
+      let low = 0.05, high = 0.98, optimalBlob = null, attempts = 0;
+      while (attempts < 7) {
+        const quality = (low + high) / 2;
+        const blob = await new Promise(res => canvas.toBlob(res, 'image/jpeg', quality));
+        const kb = blob.size / 1024;
+        optimalBlob = blob;
+        if (kb > maxKb) high = quality;
+        else if (kb < minKb && quality < 0.95) low = quality;
+        else break;
+        attempts++;
+      }
+
+      const finalKb = (optimalBlob.size / 1024).toFixed(1);
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(optimalBlob);
+      link.download = `${activePresetId}_${canvas.width}x${canvas.height}_${Math.round(finalKb)}kb.jpg`;
+      link.click();
+      showToast(`Exported: ${finalKb} KB (Target: ${minKb}-${maxKb} KB)`);
+    }
+
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    function shareWhatsApp() {
+      const text = encodeURIComponent('Free offline SSC, NTA NEET & UPSC Exam Photo/Signature Resizer: ' + window.location.href);
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    }
+
+    function shareTelegram() {
+      const text = encodeURIComponent('Free offline Exam Photo & Signature Resizer: ' + window.location.href);
+      window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`, '_blank');
+    }
+
+    function copyShareLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showToast('Link copied to clipboard!');
+      }).catch(() => {
+        showToast('Failed to copy link.');
+      });
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg;
+      t.className = 'show';
+      setTimeout(() => { t.className = t.className.replace('show', ''); }, 2500);
+    }
+  </script>
+</body>
+</html>
