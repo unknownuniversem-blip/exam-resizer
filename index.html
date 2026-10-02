@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Dynamic High-Res SVG Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%2310b981'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%230f172a' stroke='%2338bdf8' stroke-width='1.5'/%3E%3Cpath d='M8 12V8h4M20 8h4v4M24 20v4h-4M12 24H8v-4' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Cpath d='M17 10l-4 6h4l-2 6 6-7h-4l2-5z' fill='url(%23g)'/%3E%3C/svg%3E">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Exam Photo & Signature Studio - NTA NEET, JEE, SSC, UPSC & Banking</title>
+  <title>DocResizer - Official Exam Photo & Signature Studio</title>
   <meta name="description" content="100% Client-side privacy-first exam photo, signature, postcard photo resizer and compressor for NTA NEET UG, JEE Main, SSC, UPSC, and Banking exams.">
+  
+  <!-- High-Res Dynamic SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%2310b981'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%230f172a' stroke='%2338bdf8' stroke-width='1.5'/%3E%3Cpath d='M8 12V8h4M20 8h4v4M24 20v4h-4M12 24H8v-4' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Cpath d='M17 10l-4 6h4l-2 6 6-7h-4l2-5z' fill='url(%23g)'/%3E%3C/svg%3E">
+
   <style>
     :root {
       --bg: #0b1120;
@@ -43,21 +45,30 @@
       padding: 1.25rem 1rem 3rem 1rem;
     }
     header { text-align: center; margin-bottom: 1.75rem; }
-    header .badge {
-      display: inline-block;
-      padding: 4px 12px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      background: rgba(56, 189, 248, 0.12);
-      color: var(--primary);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      border-radius: 9999px;
+    .brand-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       margin-bottom: 0.6rem;
     }
+    .brand-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+    .brand-badge {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+    }
     header h1 {
-      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      font-size: clamp(1.4rem, 3.5vw, 2.1rem);
       font-weight: 800;
       color: #fff;
       margin-bottom: 0.4rem;
@@ -542,29 +553,47 @@
   </style>
 </head>
 <body>
+
+  <!-- GLOBAL NETWORK HEADER -->
+  <div id="quicktools-global-bar" style="background:#090d16; border-bottom:1px solid #1e293b; padding:10px 16px; display:flex; align-items:center; justify-content:space-between; font-family:system-ui, -apple-system, sans-serif; font-size:13px; z-index:99999; position:relative; width:100%; box-sizing:border-box;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <a href="https://unknownuniversem-blip.github.io/" style="color:#f8fafc; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:6px;">
+        <span style="background:#38bdf8; color:#0b1120; font-size:10px; font-weight:900; padding:2px 6px; border-radius:4px;">HUB</span>
+        <span>QuickTools</span>
+      </a>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; overflow-x:auto;">
+      <a href="https://unknownuniversem-blip.github.io/exam-resizer/" style="color:#38bdf8; text-decoration:none; font-weight:600; white-space:nowrap;">📷 Exam Resizer</a>
+      <span style="color:#334155;">|</span>
+      <a href="https://unknownuniversem-blip.github.io/typing-speed-finger-test/" style="color:#94a3b8; text-decoration:none; font-weight:600; white-space:nowrap;">⌨ Typing Test</a>
+      <span style="color:#334155;">|</span>
+      <a href="https://unknownuniversem-blip.github.io/" style="color:#10b981; text-decoration:none; font-weight:700; white-space:nowrap;">✨ All Tools</a>
+    </div>
+  </div>
+
   <div class="container">
-        <header>
-      <div style="display:inline-flex; align-items:center; gap:10px; margin-bottom:0.75rem;">
-        <svg width="36" height="36" viewBox="0 0 32 32" style="filter:drop-shadow(0 2px 8px rgba(56,189,248,0.3));">
+    <header>
+      <div class="brand-box">
+        <svg width="34" height="34" viewBox="0 0 32 32">
           <defs>
-            <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="bgG" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#38bdf8"/>
               <stop offset="100%" stop-color="#10b981"/>
             </linearGradient>
           </defs>
           <rect width="32" height="32" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
           <path d="M8 12V8h4M20 8h4v4M24 20v4h-4M12 24H8v-4" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <path d="M17 9.5l-4.5 6.5h4.2l-2.2 6.5 6.5-7.5h-4.2l2.2-5.5z" fill="url(#brandGrad)"/>
+          <path d="M17 9.5l-4.5 6.5h4.2l-2.2 6.5 6.5-7.5h-4.2l2.2-5.5z" fill="url(#bgG)"/>
         </svg>
-        <span style="font-size:1.15rem; font-weight:800; letter-spacing:-0.02em; color:#fff;">Doc<span style="color:#38bdf8;">Resizer</span></span>
-        <span style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3); font-size:0.65rem; font-weight:700; padding:2px 7px; border-radius:9999px; text-transform:uppercase;">Verified</span>
+        <span class="brand-name">Doc<span style="color:#38bdf8;">Resizer</span></span>
+        <span class="brand-badge">Verified</span>
       </div>
-      <div class="badge" style="display:none;">Desktop & Mobile Ready • 100% Client-Side</div>
       <h1>Exam Photo & Signature Studio</h1>
       <p>Precision dimension resizer, 80% face framing, and KB auto-compressor for NTA NEET UG, JEE Main, SSC, UPSC, and Banking exams.</p>
     </header>
 
     <div class="studio-layout">
+      <!-- CONTROLS COLUMN -->
       <div class="controls-column">
         <div class="card">
           <div class="card-title">1. Select Document</div>
@@ -581,11 +610,11 @@
           <div class="card-subtitle">Auto-configures dimension units, DPI, and portal KB bounds</div>
           
           <div class="nav-tabs" id="categoryTabs">
-            <button class="nav-tab-btn active" onclick="filterCategory('nta')">NTA (NEET/JEE)</button>
-            <button class="nav-tab-btn" onclick="filterCategory('ssc')">SSC</button>
-            <button class="nav-tab-btn" onclick="filterCategory('upsc')">UPSC</button>
-            <button class="nav-tab-btn" onclick="filterCategory('banking')">IBPS/Banking</button>
-            <button class="nav-tab-btn" onclick="filterCategory('custom')">Custom</button>
+            <button class="nav-tab-btn active" type="button" onclick="filterCategory('nta')">NTA (NEET/JEE)</button>
+            <button class="nav-tab-btn" type="button" onclick="filterCategory('ssc')">SSC</button>
+            <button class="nav-tab-btn" type="button" onclick="filterCategory('upsc')">UPSC</button>
+            <button class="nav-tab-btn" type="button" onclick="filterCategory('banking')">IBPS/Banking</button>
+            <button class="nav-tab-btn" type="button" onclick="filterCategory('custom')">Custom</button>
           </div>
 
           <div class="preset-drawer" id="presetDrawer"></div>
@@ -637,11 +666,11 @@
           <div class="form-grid">
             <div class="form-group">
               <label>Min Size (KB)</label>
-              <input type="number" id="minKbInput" value="10">
+              <input type="number" id="minKbInput" value="20">
             </div>
             <div class="form-group">
               <label>Max Size (KB)</label>
-              <input type="number" id="maxKbInput" value="200">
+              <input type="number" id="maxKbInput" value="50">
             </div>
           </div>
         </div>
@@ -698,6 +727,7 @@
         </div>
       </div>
 
+      <!-- LIVE PREVIEW VIEWPORT -->
       <div class="preview-column sticky-pane">
         <div class="canvas-viewport-card">
           <div class="card-title" style="justify-content:center;">Live Document Preview</div>
@@ -710,42 +740,35 @@
 
           <div class="live-meta-bar">
             <div>Dimensions: <strong id="lblCanvasPx">276 × 354 px</strong></div>
-            <div>File Size: <strong id="lblCanvasKb" style="color:var(--accent);">~35 KB</strong></div>
+            <div>Estimated: <strong id="lblCanvasKb" style="color:var(--accent);">~35 KB</strong></div>
             <div>DPI: <strong id="lblCanvasDpi">200</strong></div>
           </div>
 
-          <button class="btn-action" onclick="compressAndDownload()">⚡ Compress & Download JPG</button>
-          <button class="btn-secondary" onclick="resetAdjustments()">↺ Reset Framing & Sliders</button>
+          <button class="btn-action" type="button" onclick="compressAndDownload()">⚡ Compress & Download JPG</button>
+          <button class="btn-secondary" type="button" onclick="resetAdjustments()">↺ Reset Framing & Sliders</button>
         </div>
       </div>
     </div>
 
+    <!-- ECOSYSTEM SECTION -->
     <div class="ecosystem-section">
       <h3>More Zero-Cost Client-Side Utilities</h3>
       <p>Discover fast, ad-free offline web tools built for speed and privacy.</p>
       <div class="eco-grid">
-        <a href="../whatsapp/" class="eco-card">
-          <strong>Direct WhatsApp Opener</strong>
-          <span>Send messages to numbers instantly without saving to contacts.</span>
-        </a>
-        <a href="../land-converter/" class="eco-card">
-          <strong>Bigha & Land Converter</strong>
-          <span>UP, Bihar & Punjab Bigha/Biswa to Sq Ft and Acres.</span>
-        </a>
         <a href="https://unknownuniversem-blip.github.io/typing-speed-finger-test/" class="eco-card">
           <strong>Typing Speed Master</strong>
           <span>Clean WPM typing speed test with offline accuracy tracking.</span>
         </a>
-        <a href="#" class="eco-card">
-          <strong>EMI & Prepayment Calc</strong>
-          <span>Visualize interest reduction from small regular principal prepayments.</span>
+        <a href="https://unknownuniversem-blip.github.io/" class="eco-card">
+          <strong>Tools Directory Hub</strong>
+          <span>Central dashboard for all free privacy-first web applications.</span>
         </a>
       </div>
 
       <div class="share-bar">
-        <button class="share-btn" onclick="shareWhatsApp()">💬 Share on WhatsApp</button>
-        <button class="share-btn" onclick="shareTelegram()">✈️️ Telegram Share</button>
-        <button class="share-btn" onclick="copyShareLink()">🔗 Copy Link</button>
+        <button class="share-btn" type="button" onclick="shareWhatsApp()">💬 Share on WhatsApp</button>
+        <button class="share-btn" type="button" onclick="shareTelegram()">✈ Telegram Share</button>
+        <button class="share-btn" type="button" onclick="copyShareLink()">🔗 Copy Link</button>
       </div>
     </div>
 
@@ -816,20 +839,24 @@
 
   <script>
     const EXAM_PRESETS = [
+      // NTA (NEET / JEE)
       { id: 'nta-neet-photo', cat: 'nta', title: 'NEET UG Passport Photo', sub: '3.5×4.5 cm (80% Face Coverage, White BG)', unit: 'cm', w: 3.5, h: 4.5, minKb: 10, maxKb: 200, dpi: 200, guide: true, stamp: false },
       { id: 'nta-neet-postcard', cat: 'nta', title: 'NEET UG Postcard Size Photo', sub: '4×6 Inch Postcard with Name & DoP', unit: 'inch', w: 4.0, h: 6.0, minKb: 10, maxKb: 200, dpi: 200, guide: true, stamp: true },
       { id: 'nta-neet-sign', cat: 'nta', title: 'NEET UG Signature', sub: '3.5×1.5 cm Running Handwriting', unit: 'cm', w: 3.5, h: 1.5, minKb: 10, maxKb: 100, dpi: 200, guide: false, stamp: false },
       { id: 'nta-jee-photo', cat: 'nta', title: 'JEE Main Passport Photo', sub: '3.5×4.5 cm Clear Face & Ears', unit: 'cm', w: 3.5, h: 4.5, minKb: 10, maxKb: 200, dpi: 200, guide: true, stamp: false },
       { id: 'nta-jee-sign', cat: 'nta', title: 'JEE Main Signature', sub: '3.5×1.5 cm White Paper Black Ink', unit: 'cm', w: 3.5, h: 1.5, minKb: 10, maxKb: 100, dpi: 200, guide: false, stamp: false },
 
-      { id: 'ssc-photo', cat: 'ssc', title: 'SSC Photo (CGL, CHSL, GD)', sub: '3.5×4.5 cm (Approx 350×450 px)', unit: 'cm', w: 3.5, h: 4.5, minKb: 20, maxKb: 50, dpi: 200, guide: true, stamp: false },
-      { id: 'ssc-sign', cat: 'ssc', title: 'SSC Signature', sub: '4.0×2.0 cm (Approx 400×200 px)', unit: 'cm', w: 4.0, h: 2.0, minKb: 10, maxKb: 20, dpi: 200, guide: false, stamp: false },
+      // SSC
+      { id: 'ssc-photo', cat: 'ssc', title: 'SSC Photo (CGL, CHSL, GD)', sub: '3.5×4.5 cm (20-50 KB Guaranteed)', unit: 'cm', w: 3.5, h: 4.5, minKb: 20, maxKb: 50, dpi: 200, guide: true, stamp: false },
+      { id: 'ssc-sign', cat: 'ssc', title: 'SSC Signature', sub: '4.0×2.0 cm (10-20 KB)', unit: 'cm', w: 4.0, h: 2.0, minKb: 10, maxKb: 20, dpi: 200, guide: false, stamp: false },
 
+      // UPSC
       { id: 'upsc-photo', cat: 'upsc', title: 'UPSC Photo + Name/DoP', sub: 'Square 550×550 px with White Banner', unit: 'px', w: 550, h: 550, minKb: 20, maxKb: 200, dpi: 200, guide: true, stamp: true },
       { id: 'upsc-sign', cat: 'upsc', title: 'UPSC Signature', sub: 'Square 350×350 px Clear Contrast', unit: 'px', w: 350, h: 350, minKb: 20, maxKb: 200, dpi: 200, guide: false, stamp: false },
 
-      { id: 'bank-photo', cat: 'banking', title: 'Banking Photo (IBPS/SBI)', sub: '200×230 px Passport Ratio', unit: 'px', w: 200, h: 230, minKb: 20, maxKb: 50, dpi: 200, guide: true, stamp: false },
-      { id: 'bank-sign', cat: 'banking', title: 'Banking Signature', sub: '140×60 px Black Ink Only', unit: 'px', w: 140, h: 60, minKb: 10, maxKb: 20, dpi: 200, guide: false, stamp: false },
+      // BANKING (IBPS / SBI)
+      { id: 'bank-photo', cat: 'banking', title: 'Banking Photo (IBPS/SBI)', sub: '200×230 px Passport Ratio (20-50 KB)', unit: 'px', w: 200, h: 230, minKb: 20, maxKb: 50, dpi: 200, guide: true, stamp: false },
+      { id: 'bank-sign', cat: 'banking', title: 'Banking Signature', sub: '140×60 px Black Ink Only (10-20 KB)', unit: 'px', w: 140, h: 60, minKb: 10, maxKb: 20, dpi: 200, guide: false, stamp: false },
       { id: 'bank-thumb', cat: 'banking', title: 'Left Thumb Impression', sub: '240×240 px (3×3 cm)', unit: 'px', w: 240, h: 240, minKb: 20, maxKb: 50, dpi: 200, guide: false, stamp: false },
       { id: 'bank-declaration', cat: 'banking', title: 'Handwritten Declaration', sub: '800×400 px (10×5 cm)', unit: 'px', w: 800, h: 400, minKb: 50, maxKb: 100, dpi: 200, guide: false, stamp: false }
     ];
@@ -849,9 +876,14 @@
 
     function filterCategory(cat) {
       activeCategory = cat;
-      document.querySelectorAll('#categoryTabs .nav-tab-btn').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = Array.from(document.querySelectorAll('#categoryTabs .nav-tab-btn')).find(b => b.getAttribute('onclick').includes(cat));
-      if (activeBtn) activeBtn.classList.add('active');
+      const tabBtns = document.querySelectorAll('#categoryTabs .nav-tab-btn');
+      tabBtns.forEach(btn => btn.classList.remove('active'));
+      
+      tabBtns.forEach(btn => {
+        if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${cat}'`)) {
+          btn.classList.add('active');
+        }
+      });
 
       const drawer = document.getElementById('presetDrawer');
       drawer.innerHTML = '';
@@ -865,7 +897,7 @@
       list.forEach(p => {
         const item = document.createElement('div');
         item.className = `preset-item ${p.id === activePresetId ? 'active' : ''}`;
-        item.onclick = () => selectPreset(p.id);
+        item.onclick = function() { selectPreset(p.id); };
         item.innerHTML = `
           <div class="preset-info">
             <strong>${p.title}</strong>
@@ -933,6 +965,7 @@
       document.getElementById('heightLabel').innerText = `Height (${u})`;
     }
 
+    // RELIABLE FILE UPLOAD HANDLER
     document.getElementById('fileInput').addEventListener('change', function(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -940,7 +973,11 @@
       const reader = new FileReader();
       reader.onload = function(evt) {
         currentImage = new Image();
-        currentImage.onload = () => { resetAdjustments(); renderLivePreview(); };
+        currentImage.onload = function() {
+          resetAdjustments();
+          renderLivePreview();
+          showToast(`Loaded: ${file.name}`);
+        };
         currentImage.src = evt.target.result;
       };
       reader.readAsDataURL(file);
@@ -962,7 +999,7 @@
       canvas.width = 276; canvas.height = 354;
       ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = '#94a3b8'; ctx.font = '14px system-ui'; ctx.textAlign = 'center';
-      ctx.fillText('Select image to preview', canvas.width / 2, canvas.height / 2);
+      ctx.fillText('Select image above to preview', canvas.width / 2, canvas.height / 2);
     }
 
     function renderLivePreview() {
@@ -979,7 +1016,7 @@
 
       if (!currentImage) {
         ctx.fillStyle = '#94a3b8'; ctx.font = '14px system-ui'; ctx.textAlign = 'center';
-        ctx.fillText('Select an image above', canvas.width / 2, canvas.height / 2);
+        ctx.fillText('Select image above to preview', canvas.width / 2, canvas.height / 2);
         return;
       }
 
@@ -1069,9 +1106,13 @@
       }, 'image/jpeg', 0.85);
     }
 
-    // SMART TWO-WAY SIZE ENGINE (Solves "file too small" portal rejections)
+    // TWO-WAY SIZE ENGINE: PREVENTS TOO LARGE AND TOO SMALL PORTAL REJECTIONS
     async function compressAndDownload() {
-      if (!currentImage) return alert('Please select an image first.');
+      if (!currentImage) {
+        alert('Please select an image first.');
+        return;
+      }
+
       const canvas = document.getElementById('mainCanvas');
       const minKb = parseFloat(document.getElementById('minKbInput').value) || 20;
       const maxKb = parseFloat(document.getElementById('maxKbInput').value) || 50;
@@ -1081,7 +1122,6 @@
       let optimalBlob = null;
       let attempts = 0;
 
-      // Step 1: Binary search to find highest safe quality under maxKb
       while (attempts < 7) {
         const quality = (low + high) / 2;
         const blob = await new Promise(res => canvas.toBlob(res, 'image/jpeg', quality));
@@ -1093,15 +1133,15 @@
         } else if (kb < minKb) {
           low = quality;
         } else {
-          break; // Already in sweet spot
+          break;
         }
         attempts++;
       }
 
-      // Step 2: If image is STILL too small (e.g. 12 KB), safely pad bytes to reach target
       let finalBlob = optimalBlob;
       let currentKb = finalBlob.size / 1024;
 
+      // If still below minimum allowed limit (e.g. 12 KB), safely pad bytes using standard JPEG comment
       if (currentKb < minKb) {
         const targetBytes = Math.floor(targetMidKb * 1024);
         const paddingNeeded = targetBytes - finalBlob.size;
@@ -1110,15 +1150,11 @@
           const arrayBuffer = await finalBlob.arrayBuffer();
           const origBytes = new Uint8Array(arrayBuffer);
 
-          // Insert a standard JPEG COM (Comment) marker 0xFF 0xFE with harmless padding
-          // This keeps the image 100% valid JPEG while strictly meeting portal min KB limits
           const padChunk = new Uint8Array(paddingNeeded);
-          // JPEG COM marker
-          padChunk[0] = 0xFF;
+          padChunk[0] = 0xFF; // JPEG COM Marker
           padChunk[1] = 0xFE;
           padChunk[2] = (paddingNeeded >> 8) & 0xFF;
           padChunk[3] = paddingNeeded & 0xFF;
-          // Fill rest with safe null bytes
           for (let i = 4; i < paddingNeeded; i++) padChunk[i] = 0x20;
 
           finalBlob = new Blob([origBytes, padChunk], { type: 'image/jpeg' });
@@ -1130,8 +1166,26 @@
       link.href = URL.createObjectURL(finalBlob);
       link.download = `${activePresetId}_${canvas.width}x${canvas.height}_${Math.round(finalKb)}kb.jpg`;
       link.click();
-      showToast(`Exported: ${finalKb} KB (Within allowed ${minKb}-${maxKb} KB)`);
-    }).catch(() => {
+      showToast(`Exported: ${finalKb} KB (Allowed: ${minKb}-${maxKb} KB)`);
+    }
+
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    function shareWhatsApp() {
+      const text = encodeURIComponent('Free offline SSC, NTA NEET & UPSC Exam Photo/Signature Resizer: ' + window.location.href);
+      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    }
+
+    function shareTelegram() {
+      const text = encodeURIComponent('Free offline Exam Photo & Signature Resizer: ' + window.location.href);
+      window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`, '_blank');
+    }
+
+    function copyShareLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showToast('Link copied to clipboard!');
+      }).catch(() => {
         showToast('Failed to copy link.');
       });
     }
@@ -1143,12 +1197,5 @@
       setTimeout(() => { t.className = t.className.replace('show', ''); }, 2500);
     }
   </script>
-<!-- QuickTools Shared Network Bar -->
-<div style="background:#090d16; border-top:1px solid #1e293b; padding:12px 16px; text-align:center; font-family:system-ui, sans-serif; font-size:13px; color:#94a3b8; margin-top:30px;">
-  <span style="font-weight:700; color:#f8fafc; margin-right:12px;">🛠 QuickTools Network:</span>
-  <a href="https://unknownuniversem-blip.github.io/typing-speed-finger-test/" style="color:#38bdf8; text-decoration:none; margin:0 8px; font-weight:600;">⌨ Typing Test</a> |
-  <a href="https://unknownuniversem-blip.github.io/exam-resizer/" style="color:#38bdf8; text-decoration:none; margin:0 8px; font-weight:600;">📷 Exam Photo Resizer</a> |
-  <a href="https://unknownuniversem-blip.github.io/" style="color:#38bdf8; text-decoration:none; margin:0 8px; font-weight:600;">🏠 Tools Hub</a>
-</div>
 </body>
 </html>
