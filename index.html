@@ -6,7 +6,6 @@
   <title>DocResizer - Official Exam Photo & Signature Studio</title>
   <meta name="description" content="100% Client-side privacy-first exam photo, signature, postcard photo resizer and compressor for NTA NEET UG, JEE Main, SSC, UPSC, and Banking exams.">
   
-  <!-- High-Res Dynamic SVG Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2338bdf8'/%3E%3Cstop offset='100%25' stop-color='%2310b981'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%230f172a' stroke='%2338bdf8' stroke-width='1.5'/%3E%3Cpath d='M8 12V8h4M20 8h4v4M24 20v4h-4M12 24H8v-4' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3Cpath d='M17 10l-4 6h4l-2 6 6-7h-4l2-5z' fill='url(%23g)'/%3E%3C/svg%3E">
 
   <style>
@@ -488,24 +487,26 @@
       text-decoration: none;
     }
     .footer-links a:hover { color: var(--primary); }
+
+    /* Modals */
     .modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      z-index: 1000;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 999999;
       align-items: center;
       justify-content: center;
       padding: 1rem;
     }
-    .modal-backdrop.active { display: flex; }
+    .modal-backdrop.active { display: flex !important; }
     .modal-dialog {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       width: 100%;
-      max-width: 550px;
-      max-height: 80vh;
+      max-width: 520px;
+      max-height: 85vh;
       overflow-y: auto;
       padding: 1.5rem;
     }
@@ -783,6 +784,38 @@
     </footer>
   </div>
 
+  <!-- CONGRATULATIONS SUCCESS POPUP -->
+  <div class="modal-backdrop" id="modalDownloadSuccess">
+    <div class="modal-dialog" style="text-align:center; max-width:440px;">
+      <div style="font-size:3rem; margin-bottom:0.4rem;">🎉</div>
+      <h3 style="color:#fff; font-size:1.3rem; margin-bottom:0.3rem;">File Downloaded!</h3>
+      <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:1.2rem;" id="successModalMsg">Your exam document is compressed and ready to upload.</p>
+      
+      <div style="background:#0d1526; border:1px solid #223249; border-radius:8px; padding:12px; margin-bottom:1.2rem; text-align:left;">
+        <div style="font-size:0.75rem; font-weight:700; color:#38bdf8; text-transform:uppercase; margin-bottom:8px; letter-spacing:0.04em;">✨ Explore Our Other 100% Free Tools:</div>
+        
+        <a href="https://unknownuniversem-blip.github.io/typing-speed-finger-test/" target="_blank" style="display:flex; align-items:center; gap:10px; padding:10px; text-decoration:none; color:#f8fafc; border-radius:6px; background:#151f32; border:1px solid #223249; margin-bottom:8px;">
+          <span style="font-size:1.4rem;">⌨️</span>
+          <div>
+            <strong style="font-size:0.88rem; display:block; color:#fff;">Typing Speed Master</strong>
+            <span style="font-size:0.73rem; color:#94a3b8;">Practice typing test for SSC CGL / CHSL exams</span>
+          </div>
+        </a>
+
+        <a href="https://unknownuniversem-blip.github.io/" target="_blank" style="display:flex; align-items:center; gap:10px; padding:10px; text-decoration:none; color:#f8fafc; border-radius:6px; background:#151f32; border:1px solid #223249;">
+          <span style="font-size:1.4rem;">🏠</span>
+          <div>
+            <strong style="font-size:0.88rem; display:block; color:#fff;">QuickTools Hub</strong>
+            <span style="font-size:0.73rem; color:#94a3b8;">Discover all free client-side web utilities</span>
+          </div>
+        </a>
+      </div>
+
+      <button class="btn-action" type="button" onclick="shareWhatsApp()" style="margin-bottom:8px;">💬 Share Tool with Friends on WhatsApp</button>
+      <button class="btn-secondary" type="button" onclick="closeModal('modalDownloadSuccess')">Close / Resize Another</button>
+    </div>
+  </div>
+
   <div class="modal-backdrop" id="modalPrivacy">
     <div class="modal-dialog">
       <div class="modal-header">
@@ -839,22 +872,18 @@
 
   <script>
     const EXAM_PRESETS = [
-      // NTA (NEET / JEE)
       { id: 'nta-neet-photo', cat: 'nta', title: 'NEET UG Passport Photo', sub: '3.5×4.5 cm (80% Face Coverage, White BG)', unit: 'cm', w: 3.5, h: 4.5, minKb: 10, maxKb: 200, dpi: 200, guide: true, stamp: false },
       { id: 'nta-neet-postcard', cat: 'nta', title: 'NEET UG Postcard Size Photo', sub: '4×6 Inch Postcard with Name & DoP', unit: 'inch', w: 4.0, h: 6.0, minKb: 10, maxKb: 200, dpi: 200, guide: true, stamp: true },
       { id: 'nta-neet-sign', cat: 'nta', title: 'NEET UG Signature', sub: '3.5×1.5 cm Running Handwriting', unit: 'cm', w: 3.5, h: 1.5, minKb: 10, maxKb: 100, dpi: 200, guide: false, stamp: false },
       { id: 'nta-jee-photo', cat: 'nta', title: 'JEE Main Passport Photo', sub: '3.5×4.5 cm Clear Face & Ears', unit: 'cm', w: 3.5, h: 4.5, minKb: 10, maxKb: 200, dpi: 200, guide: true, stamp: false },
       { id: 'nta-jee-sign', cat: 'nta', title: 'JEE Main Signature', sub: '3.5×1.5 cm White Paper Black Ink', unit: 'cm', w: 3.5, h: 1.5, minKb: 10, maxKb: 100, dpi: 200, guide: false, stamp: false },
 
-      // SSC
       { id: 'ssc-photo', cat: 'ssc', title: 'SSC Photo (CGL, CHSL, GD)', sub: '3.5×4.5 cm (20-50 KB Guaranteed)', unit: 'cm', w: 3.5, h: 4.5, minKb: 20, maxKb: 50, dpi: 200, guide: true, stamp: false },
       { id: 'ssc-sign', cat: 'ssc', title: 'SSC Signature', sub: '4.0×2.0 cm (10-20 KB)', unit: 'cm', w: 4.0, h: 2.0, minKb: 10, maxKb: 20, dpi: 200, guide: false, stamp: false },
 
-      // UPSC
       { id: 'upsc-photo', cat: 'upsc', title: 'UPSC Photo + Name/DoP', sub: 'Square 550×550 px with White Banner', unit: 'px', w: 550, h: 550, minKb: 20, maxKb: 200, dpi: 200, guide: true, stamp: true },
       { id: 'upsc-sign', cat: 'upsc', title: 'UPSC Signature', sub: 'Square 350×350 px Clear Contrast', unit: 'px', w: 350, h: 350, minKb: 20, maxKb: 200, dpi: 200, guide: false, stamp: false },
 
-      // BANKING (IBPS / SBI)
       { id: 'bank-photo', cat: 'banking', title: 'Banking Photo (IBPS/SBI)', sub: '200×230 px Passport Ratio (20-50 KB)', unit: 'px', w: 200, h: 230, minKb: 20, maxKb: 50, dpi: 200, guide: true, stamp: false },
       { id: 'bank-sign', cat: 'banking', title: 'Banking Signature', sub: '140×60 px Black Ink Only (10-20 KB)', unit: 'px', w: 140, h: 60, minKb: 10, maxKb: 20, dpi: 200, guide: false, stamp: false },
       { id: 'bank-thumb', cat: 'banking', title: 'Left Thumb Impression', sub: '240×240 px (3×3 cm)', unit: 'px', w: 240, h: 240, minKb: 20, maxKb: 50, dpi: 200, guide: false, stamp: false },
@@ -965,7 +994,6 @@
       document.getElementById('heightLabel').innerText = `Height (${u})`;
     }
 
-    // RELIABLE FILE UPLOAD HANDLER
     document.getElementById('fileInput').addEventListener('change', function(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -1106,7 +1134,7 @@
       }, 'image/jpeg', 0.85);
     }
 
-    // TWO-WAY SIZE ENGINE: PREVENTS TOO LARGE AND TOO SMALL PORTAL REJECTIONS
+    // GUARANTEED DOWNLOAD + POPUP ENGINE
     async function compressAndDownload() {
       if (!currentImage) {
         alert('Please select an image first.');
@@ -1141,7 +1169,6 @@
       let finalBlob = optimalBlob;
       let currentKb = finalBlob.size / 1024;
 
-      // If still below minimum allowed limit (e.g. 12 KB), safely pad bytes using standard JPEG comment
       if (currentKb < minKb) {
         const targetBytes = Math.floor(targetMidKb * 1024);
         const paddingNeeded = targetBytes - finalBlob.size;
@@ -1151,7 +1178,7 @@
           const origBytes = new Uint8Array(arrayBuffer);
 
           const padChunk = new Uint8Array(paddingNeeded);
-          padChunk[0] = 0xFF; // JPEG COM Marker
+          padChunk[0] = 0xFF;
           padChunk[1] = 0xFE;
           padChunk[2] = (paddingNeeded >> 8) & 0xFF;
           padChunk[3] = paddingNeeded & 0xFF;
@@ -1162,32 +1189,80 @@
       }
 
       const finalKb = (finalBlob.size / 1024).toFixed(1);
+      const fileName = `${activePresetId}_${canvas.width}x${canvas.height}_${Math.round(finalKb)}kb.jpg`;
+
+      // Trigger automatic file download
       const link = document.createElement('a');
       link.href = URL.createObjectURL(finalBlob);
-      link.download = `${activePresetId}_${canvas.width}x${canvas.height}_${Math.round(finalKb)}kb.jpg`;
+      link.download = fileName;
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
+
       showToast(`Exported: ${finalKb} KB (Allowed: ${minKb}-${maxKb} KB)`);
+
+      // Trigger the congratulations popup modal
+      const msgEl = document.getElementById('successModalMsg');
+      if (msgEl) {
+        msgEl.innerText = `Saved at ${finalKb} KB (Official portal requirement: ${minKb}-${maxKb} KB).`;
+      }
+      setTimeout(() => {
+        openModal('modalDownloadSuccess');
+      }, 350);
     }
 
-    function openModal(id) { document.getElementById(id).classList.add('active'); }
-    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('active');
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('active');
+    }
 
     function shareWhatsApp() {
       const text = encodeURIComponent('Free offline SSC, NTA NEET & UPSC Exam Photo/Signature Resizer: ' + window.location.href);
-      window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+        window.location.href = 'whatsapp://send?text=' + text;
+      } else {
+        window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
+      }
     }
 
     function shareTelegram() {
       const text = encodeURIComponent('Free offline Exam Photo & Signature Resizer: ' + window.location.href);
-      window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`, '_blank');
+      window.open('https://t.me/share/url?url=' + encodeURIComponent(window.location.href) + '&text=' + text, '_blank');
     }
 
     function copyShareLink() {
-      navigator.clipboard.writeText(window.location.href).then(() => {
+      const url = window.location.href;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('Link copied to clipboard!');
+        }).catch(() => fallbackCopy(url));
+      } else {
+        fallbackCopy(url);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
         showToast('Link copied to clipboard!');
-      }).catch(() => {
-        showToast('Failed to copy link.');
-      });
+      } catch (err) {
+        prompt('Copy this link:', text);
+      }
+      document.body.removeChild(textArea);
     }
 
     function showToast(msg) {
